@@ -47,6 +47,8 @@
             left: 0;
             transition: transform 0.3s ease;
             padding-top: 50px;
+            /* Added extra padding at the bottom for better scrolling */
+            padding-bottom: 30px;
         }
         
         .screen.hidden {
@@ -78,6 +80,8 @@
             grid-template-columns: 1fr;
             gap: 12px;
             margin-top: 15px;
+            /* Added margin at bottom to ensure all items are visible */
+            margin-bottom: 30px;
         }
         
         .app-button {
@@ -194,6 +198,15 @@
             .app-button {
                 padding: 14px 16px;
             }
+            
+            /* Allow more scrolling space on smaller screens */
+            .screen {
+                padding-bottom: 50px;
+            }
+            
+            .button-grid {
+                margin-bottom: 40px;
+            }
         }
         
         @media (max-width: 392px) {
@@ -204,6 +217,23 @@
             .app-button {
                 font-size: 15px;
             }
+        }
+        
+        /* Custom scrollbar for better mobile experience */
+        .screen::-webkit-scrollbar {
+            width: 5px;
+        }
+        
+        .screen::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .screen::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .screen::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
         }
     </style>
 </head>
@@ -400,6 +430,9 @@
             
             // Show the requested screen
             document.getElementById(screenId).classList.remove('hidden');
+            
+            // Scroll to top when switching screens
+            document.getElementById(screenId).scrollTop = 0;
         }
         
         // Make sure the interface fits the screen
